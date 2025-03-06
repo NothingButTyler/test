@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Notifications</title>
+</head>
+<body style="background-color: black;">
+    <button id="notifyButton">Send Daily Notifications</button>
+
+    <script>
+        // Check for notification permission
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission();
+        }
+
+        // Function to show the notification with an icon
+        function showNotification(title, body) {
+            if (Notification.permission === "granted") {
+                new Notification(title, { 
+                    body: body,
+                    icon: 'https://em-content.zobj.net/source/apple/155/face-with-party-horn-and-party-hat_1f973.png' // Replace with your icon path
+                });
+            }
+        }
+
+        // Function to send notifications daily
+        function sendDailyNotifications() {
+            // Show daily notifications in a loop
+            setInterval(() => {
+                showNotification("Notification!", "Check out our new content!");
+                showNotification("Notification!", "You are amazing!");
+                showNotification("Notification!", "Care to share with us how you are feeling?");
+            }, 24 * 60 * 60 * 1000); // Notify every 24 hours
+        }
+
+        // Set up the button click event
+        document.getElementById("notifyButton").onclick = function() {
+            // Send immediate notification with the icon
+            showNotification("Notification!", "You have clicked the button!");
+
+            // Start sending daily notifications
+            sendDailyNotifications();
+        };
+    </script>
+</body>
+</html>
